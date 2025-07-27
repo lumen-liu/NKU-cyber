@@ -1,0 +1,166 @@
+#include <iostream>
+using namespace std;
+
+//节点
+class Node
+{
+public:
+	int num;
+	Node *next; 
+	Node(int n){num = n; next = NULL;};
+	~Node();
+};     
+ 
+//队列
+template <class T>
+class Queue
+{
+private:
+	T* front;    //队头指针
+	T* rear;		//队尾指针
+ public:
+	 Queue();		             //构造函数初始化队列
+	 ~Queue();	                 //析构函数销毁队列
+	 bool isEmpty();		     //队列是否为空
+	 int getLength();		     //队列长度
+	 void Enqueue(int val);	     //在队尾插入节点
+	 void DeQueue(int &val);	 //删除队头节点
+	 void Print();			     //打印队列
+
+ };
+
+//初始化队列
+template <class T>
+Queue<T>::Queue()
+{
+	front = rear = NULL;
+}	
+ 
+//销毁队列
+template <class T>
+Queue<T>::~Queue()
+{
+	while(front)
+	{
+		rear = front->next;
+		free(front);
+		front = rear;
+	}
+}
+
+//在队尾插入数据
+template <class T>
+void Queue<T>::Enqueue(int val)
+{
+	T* tmp = new Node(val);
+	if(front == NULL)
+	{
+		front = rear = tmp;
+	}
+	else
+	{
+		rear->next = tmp;
+		rear=tmp;
+	}
+	rear->next-NULL;
+}
+
+//删除队头，并返回当前队头的值
+template <class T>
+void Queue<T>::DeQueue(int & val)
+{
+	if(front == rear)
+	{
+		val = -1;
+		return;
+	}
+	T* tmp = new T(val);
+	val = front->next->num;
+	//队列只有一个元素
+    if(front->next == rear)
+	{
+        rear = front;
+        front->next = NULL;
+    }
+	else
+	{
+		tmp = front;
+        front = front->next;
+        tmp->next = NULL;
+    }    
+    free(tmp);
+}
+ 
+//打印
+template <class T>
+void Queue<T>::Print()
+{
+	if(front == rear)
+	{
+		cout<< "队列为空" << endl;
+		return;
+	}
+	Node* tmp = front;
+	while(tmp!=rear)
+	{
+		cout<<tmp->num<<endl;
+		tmp = tmp->next;
+	}
+	cout<<tmp->num<<endl;
+}
+ 
+ 
+ 
+//队列是否为空
+template <class T>
+bool Queue<T>::isEmpty()
+{
+	if(front == rear)
+		return true;
+	else
+		return false;
+}
+//队列长度
+template <class T>
+int Queue<T>:: getLength()
+{
+	if(front == rear)
+		return 0;
+	Node* tmp = front;
+	int index = 1;
+	do
+	{
+		index++;
+		tmp = tmp->next;
+	}while(tmp!=rear);
+	return index;
+
+}
+
+
+
+void main()
+{
+	Queue<Node> q;
+	bool flag = q.isEmpty();
+	q.Enqueue(1);
+	q.Enqueue(2);
+	q.Enqueue(3);
+	q.Enqueue(4);
+	q.Enqueue(5);
+	q.Enqueue(6);
+	q.Enqueue(7);
+	q.Print();
+	cout <<"队列长度为："<<q.getLength()<<endl;
+	int val;
+	q.DeQueue(val);
+	q.DeQueue(val);
+	cout <<"取出两个队头后"<<endl;
+	q.Print();
+	q.Enqueue(1);
+	q.Enqueue(2);
+	q.Enqueue(3);
+	q.Enqueue(4);
+	cout <<"再插入四个到队尾后"<<endl;
+	q.Print();
+}

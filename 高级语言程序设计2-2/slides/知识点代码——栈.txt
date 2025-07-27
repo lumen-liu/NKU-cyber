@@ -1,0 +1,130 @@
+#include<iostream>
+using namespace std;
+template<class T>
+class Stack 
+{
+private:
+	T *stk;  //指向起始地址的指针
+	int top;   //始终指向栈顶元素
+	int MAXN;  //栈的最大存储容量
+public:
+	Stack(int size) ;     //构造函数，初始化一个栈时需要指定初始大小
+	~Stack() ;            //析构函数
+	T push(T x);      //压栈
+	T pop(T * px);    //出栈
+	T getTop();         //获取栈顶元素
+	int isEmpty ()const;  //判断栈是否为空
+	int isFull ()const;   //判断栈是否已满
+	int size()const;      //获取栈的容量
+};
+
+template<class T>
+Stack<T>::Stack(int size) 
+{
+	MAXN = size;
+	stk = new T[MAXN];
+	top = -1;
+}
+
+template<class T>
+Stack<T>::~Stack() 
+{
+	delete stk;
+}
+
+template<class T>
+T Stack<T>::push(T x) 
+{
+	//栈满了
+	if(top >= MAXN - 1)
+	{
+		return 0;
+	}
+	//先把栈顶调高，再向栈顶添加元素
+	top++;
+	stk[top] = x;
+	return 1;
+}
+
+template<class T>
+T Stack<T>::pop(T *x) 
+{
+	//栈空了
+	if (top == -1)
+	{
+		return -0;
+	}
+	//先把栈顶元素弹出，再调低栈顶
+	*x = stk[top];
+	top--;
+	return 1;
+}
+
+template<class T>
+T Stack<T>::getTop() 
+{
+	if (top == -1)
+	{
+		return NULL;
+	}
+	return stk[top];
+}
+
+template<class T>
+int Stack<T>::isEmpty()const 
+{
+	//1为空，0为非空
+	return top == -1;
+}
+
+template<class T>
+int Stack<T>::isFull()const 
+{
+	//1为满，0为非满
+	return top == MAXN - 1;
+}
+
+template<class T>
+int Stack<T>::size() const
+{
+	return top;
+}
+
+
+
+int main()
+{
+
+	Stack<int> s(20) ;
+	cout << "是否为空栈" << s.isEmpty() << endl;
+	s.push(100);
+	cout << "100入栈" << endl;
+	s.push(50);
+	cout << "50入栈" << endl;
+	s.push(10);
+	cout << "10入栈" << endl;
+	cout <<"栈的大小"<< s.size() << endl;
+	int x = 0;
+	s.pop(&x);
+	cout <<"弹出的元素"<< x << endl;
+	cout <<"弹出一个元素后栈的大小"<< s.size()<<endl;
+	cout << "栈顶元素" << s.getTop() << endl;
+
+	cout <<"===============" << endl;
+
+	Stack<double> s1(20) ;
+	cout << "是否为空栈" << s1.isEmpty() << endl;
+	s1.push(10.3);
+	cout << "10.3入栈" << endl;
+	s1.push(5.4);
+	cout << "5.4入栈" << endl;
+	s1.push(1.3);
+	cout << "1.3入栈" << endl;
+	cout <<"栈的大小"<< s1.size() << endl;
+	double x1 = 2.2;
+	s1.pop(&x1);
+	cout <<"弹出的元素"<< x1 << endl;
+	cout <<"弹出一个元素后栈的大小"<< s1.size()<<endl;
+	cout << "栈顶元素" << s1.getTop() << endl;
+	return 0;
+}

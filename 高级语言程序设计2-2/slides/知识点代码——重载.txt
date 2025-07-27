@@ -1,0 +1,204 @@
+//#include<iostream>
+//using namespace std;
+//
+//template<class T>
+//class Rational
+//{
+//		T a,b;
+//	public:
+//		Rational()
+//		{
+//			this->a = 0;
+//			this->b = 1;
+//		}
+//		Rational(int a,int b)
+//		{
+//			this->a = a;
+//			this->b = b;
+//		}
+//		void Disp()
+//		{
+//			if(a%b==0)
+//				cout<<a/b;
+//			else
+//			    cout <<a<<"/"<<b;
+//		}
+//		//成员函数运算
+//		/*Rational add(Rational r)
+//		{
+//			Rational temp;
+//			temp.a = this->a * r.b + this->b * r.a; 
+//			temp.b = this->b * r.b;
+//			temp.euclid();
+//			return temp;
+//		}
+//		Rational minus(Rational r)
+//		{
+//			Rational temp;
+//			temp.a = this->a * r.b - this->b * r.a;
+//			temp.b = this->b * r.b;
+//			temp.euclid();
+//			return temp;
+//		}
+//		Rational multiply(Rational r)
+//		{
+//			Rational temp;
+//			temp.a = this->a * r.a;
+//			temp.b = this->b * r.b;
+//			temp.euclid();
+//			return temp;
+//		}
+//		Rational div(Rational r)
+//		{
+//			Rational temp;
+//			temp.a = this->a * r.b;
+//			temp.b = this->b * r.a;
+//			temp.euclid();
+//			return temp;
+//		}*/
+//
+//		//注：成员函数重载和友元重载不可共存，测试时请注释掉其中一种 
+//
+//		
+//		//友元操作符重载
+//		/*friend Rational operator +(Rational r1,Rational r2)
+//		{
+//			Rational temp;
+//			temp.a = r1.a*r2.b+r2.b*r2.a;
+//			temp.b = r1.b*r2.b;
+//			temp.euclid();
+//			return temp;
+//		}
+//		friend Rational operator -(Rational r1,Rational r2)
+//		{
+//			Rational temp;
+//			temp.a = r1.a*r2.b - r2.b*r2.a;
+//			temp.b = r1.b*r2.b;
+//			temp.euclid();
+//			return temp;
+//		}
+//		friend Rational operator *(Rational r1,Rational r2)
+//		{
+//			Rational temp;
+//			temp.a = r1.a*r2.a;
+//			temp.b = r1.b*r2.b;
+//			temp.euclid();
+//			return temp;
+//		}
+//		friend Rational operator /(Rational r1,Rational r2)
+//		{
+//			Rational temp;
+//			temp.a = r1.a*r2.b;
+//			temp.b = r1.b*r2.a;
+//			temp.euclid();
+//			return temp;
+//		}*/
+//		
+//	
+//		//成员函数重载
+//		Rational operator +(Rational r)
+//		{
+//			Rational temp;
+//			temp.a = this->a * r.b + this->b * r.a; 
+//			temp.b = this->b * r.b;
+//			temp.euclid();
+//			return temp;
+//		}
+//		Rational operator -(Rational r)
+//		{
+//			Rational temp;
+//			temp.a = this->a * r.b - this->b * r.a;
+//			temp.b = this->b * r.b;
+//			temp.euclid();
+//			return temp;
+//		}
+//		void operator *(Rational r)
+//		{
+//			Rational temp;
+//			temp.a = this->a * r.a;
+//			temp.b = this->b * r.b;
+//			temp.euclid();
+//			this->a = temp.a;
+//			this->b = temp.b;
+//		}
+//		void operator /(Rational r)
+//		{
+//			Rational temp;
+//			temp.a = this->a * r.b;
+//			temp.b = this->b * r.a;
+//			temp.euclid();
+//			this->a = temp.a;
+//			this->b = temp.b;
+//		}
+//		void operator++()
+//		{
+//			Rational temp ;
+//			temp.a = this->a + this->b;
+//			temp.b = this->b;
+//			temp.euclid();
+//			this->a = temp.a;
+//			this->b = temp.b;
+//		}
+//		void operator=(Rational r)
+//		{
+//			Rational temp;
+//			this->a = r.b;
+//			this->b = r.a;
+//			this->euclid();
+//		}
+//
+//		//用欧几里得算法求最大公约数然后化简
+//		void euclid()
+//		{
+//			int _a = this->a; //分子，除数
+//			int _b = this->b; //分母，被除数 
+//			int t;
+//			// b / a ,余数t
+//			while (_a>0) 
+//			{
+//				t =_b % _a;
+//				_b = _a;
+//				_a = t;
+//			}
+//			//余数t=0时找到最大公约数
+//			this->a /= _b;
+//			this->b /= _b;
+//		}
+//};
+//
+//void main()
+//{
+//	
+//	// # 3
+//	cout << "第3题测试 ..." << endl;
+//	Rational<int> r1(2,6);
+//	Rational<int> r2(1,6);
+//	Rational<int> r3(2,6);
+//	Rational<int> r4(2,6);
+//	Rational<int> r5(2,6);
+//	Rational<int> r6(2,6);
+//
+//	cout << "Rational 1: ";
+//	r1.Disp();
+//	cout << " Rational 2: ";
+//	r2.Disp();
+//
+//	cout << "\n加法测试..." << endl;
+//	Rational<int> temp = r1+r2;
+//	temp.Disp();
+//	cout << "\n减法测试..." << endl;
+//	temp=r1-r2;
+//	temp.Disp();
+//	cout << "\n乘法测试..." << endl;
+//	r3*r2;
+//	r3.Disp();
+//	cout << "\n除法测试..." << endl;
+//	r4/r2;
+//	r4.Disp();
+//	cout << "\n自加测试..." << endl;
+//	r5++;
+//	r5.Disp();
+//	cout << "\n倒数测试..." << endl;
+//	r6 = r2;
+//	r6.Disp();
+//}

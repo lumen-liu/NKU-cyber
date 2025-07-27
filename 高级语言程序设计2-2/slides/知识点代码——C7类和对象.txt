@@ -1,0 +1,846 @@
+#include<iostream>
+using namespace std;
+//=========================类的定义和对象的初始化============================================
+///*
+//   【重点】
+//   抽象定义一个足球队类，包括名称（char*类型）、胜平负的场次（int类型）
+//   公有私有保护类型的访问规则，一定要自行查看课件等资料
+//*/
+//class SoccerTeam
+//{
+//	//成员变量
+//    char * teamname;
+//    int win;
+//    int draw;
+//    int lose;
+//public:
+//	//成员函数（可以像这样在类内声明类外定义，也可以直接在类内定义）
+//	void setname(char * name);
+//	void setwin(int w);
+//	void setdraw(int d);
+//	void setlose(int l);
+//	void printInfo();
+//}; //注意分号别忘了！
+//
+////类外定义已经在类内声明的成员函数
+//void SoccerTeam::setname(char * name)
+//{
+//	teamname = new char[strlen(name)+1];
+//	strcpy(teamname, name);
+//}
+//void SoccerTeam::setwin(int w)
+//{
+//	win = w;
+//}
+//void SoccerTeam::setdraw(int d)
+//{
+//	draw = d;
+//}
+//void SoccerTeam::setlose(int l)
+//{
+//	lose = l;
+//}
+//
+//int main()
+//{
+///*
+//   【重点】
+//   实例化一个足球队类的对象
+//   直接赋值，set函数等（其他见下面构造函数）
+//*/
+//	//SoccerTeam teamA={"Real Madrid",3,0,0};
+//	SoccerTeam teamB;
+//	teamB.setname("Man United");
+//	teamB.setwin(30);
+//	teamB.setdraw(6);
+//	teamB.setlose(2);
+//	return 0;
+//}
+
+
+
+//=========================构造函数========================================
+///*
+//   【重点】
+//   除了刚刚的初始化方式，最常用的就是构造函数了
+//   系统有一个默认的构造函数，啥也不做，相当于建立一个空对象
+//*/
+//class SoccerTeam
+//{
+//   	int id;
+//    char * teamname;
+//    int win;
+//    int draw;
+//    int lose;
+//public: 
+//    SoccerTeam(int num,char * name,int w,int d,int l);// 构造函数
+//}; 
+//
+//SoccerTeam::SoccerTeam (int num, char *name,int w,int d,int l)// 构造函数
+//{ 
+//	id=num;
+//    teamname = new char[strlen(name)+1];   
+//    strcpy(teamname,name);
+//    win = w;
+//    draw = d;
+//    lose = l;
+//} 
+//
+////SoccerTeam::SoccerTeam (int num, char *name):id(num)// 初始化列表构造函数
+////{ 
+////    teamname = new char[strlen(name)+1];   
+////    strcpy(teamname,name);
+////    win = 0;
+////    draw = 0;
+////    lose = 0;
+////}     
+//   
+//int main()
+//{
+//	char* name = "Man United";
+//	//SoccerTeam teamA;        //默认构造函数，只是建立对象什么也不初始化
+//	SoccerTeam teamB(1,name,30,8,0);  //定义的构造函数，初始化
+//	return 0;
+//}
+
+
+
+//=======================同名的不同构造函数=================================
+//class SoccerTeam
+//{
+//	char * teamname;
+//	int win;
+//	int draw;
+//	int lose;
+//public:   
+//	SoccerTeam(char * name);// 构造函数
+//	SoccerTeam (char *name,int win1,int draw1,int lose1 );// 另一个构造函数
+//	void printInfo()
+//	{ 
+//		cout<<teamname<<":"<<win<<"胜"<<draw<<"平"<<lose<<"负"<<endl;
+//	}
+//	void score()
+//	{ 
+//		cout<<"积分"<<":"<<win*3+draw<<endl;
+//	}
+//}; 
+//
+//SoccerTeam::SoccerTeam (char *name)// 构造函数1
+//{ 
+//	teamname = new char[strlen(name)+1];   
+//	strcpy(teamname,name);
+//	win = 0;
+//	draw = 0;
+//	lose = 0;
+//} 
+//SoccerTeam::SoccerTeam (char *name,int win1,int draw1,int lose1 )// 构造函数2
+//{ 
+//	teamname = new char[strlen(name)+1];   
+//	strcpy(teamname,name);
+//	win = win1;
+//	draw = draw1;
+//	lose = lose1;
+//}
+//    
+//   
+//int main()
+//{
+//	char* name = "Man United";
+//	SoccerTeam teamA(name);
+//	teamA.printInfo();
+//	teamA.score();
+//
+//	name = "Real Madrid";
+//	SoccerTeam teamB(name,31,7,0);
+//	teamB.printInfo();
+//	teamB.score();
+//  return 0;
+//}
+
+
+
+//==========================对象数组初始化==================================
+//
+//class SoccerTeam
+//{
+//	char * teamname;
+//	int win;
+//	int draw;
+//	int lose;
+//public: 
+//	SoccerTeam(char * name);// 构造函数
+//	void printInfo()
+//	{ 
+//		cout<<teamname<<":"<<win<<"胜"<<draw<<"平"<<lose<<"负"<<endl;
+//	}
+//	void score()
+//	{ 
+//		cout<<"积分"<<":"<<win*3+draw<<endl;
+//	}
+//}; 
+//
+//SoccerTeam::SoccerTeam (char *name)// 构造函数
+//{ 
+//    teamname = new char[strlen(name)+1];   
+//    strcpy(teamname,name);
+//    win = 0;
+//    draw = 0;
+//    lose = 0;
+//}     
+//   
+//int main()
+//{
+//	int a[5]={1,2,3,4,5};
+//	SoccerTeam team[4]={SoccerTeam("FC Barcelona"),  SoccerTeam("Juventus") ,SoccerTeam("Real Madrid"),  SoccerTeam("Arsenal") };
+//	team[0].printInfo();
+//	team[1].printInfo();
+//	team[2].printInfo();
+//	team[3].printInfo();
+//	return 0;
+//}
+
+
+//=====================对象数组初始化(同前面的set函数)===========================
+//class SoccerTeam
+//{
+//	char * teamname;
+//	int win;
+//	int draw;
+//	int lose;
+// 
+//public:
+//    
+//	void SetMemberValue(char* name,int w,int d,int l )  //其实就是通过set函数初始化
+//	{
+//		teamname = name;
+//		win = w;
+//		draw = d;
+//		lose = l;
+//	}
+//	void printInfo()
+//	{ 
+//		cout<<teamname<<":"<<win<<"胜"<<draw<<"平"<<lose<<"负"<<endl;
+//	}
+//	void score()
+//	{ 
+//		   cout<<"积分"<<":"<<win*3+lose<<endl;
+//	}
+//}; 
+//  
+//int main()
+//{
+//	SoccerTeam team[4];
+//
+//	for(int i=0;i<4;i++)
+//	{
+//		cout<<"Input Team Name:";
+//		char *name = new char[50];
+//		cin>>name;
+//		int w,d,l;
+//		cout<<"Input Win Number:";
+//		cin>>w;
+//		cout<<"Input Draw Number:";
+//		cin>>d;
+//		cout<<"Input Lose Number:";
+//		cin>>l;
+//		team[i].SetMemberValue(name,w,d,l);
+//		team[i].printInfo();
+//		team[i].score();
+//		//在主函数中对成员变量赋值
+//	}
+//	return 0;
+//}
+
+
+
+//=====================析构函数===========================
+//class SoccerTeam
+//{
+//	char * teamname;
+//	int win;
+//	int draw;
+//	int lose;
+// 
+//public:  
+//	SoccerTeam(char * name);// 构造函数
+//	~SoccerTeam(); //析构函数
+//	void printInfo()
+//	{ 
+//		cout<<teamname<<":"<<win<<"胜"<<draw<<"平"<<lose<<"负"<<endl;
+//	}
+//	void score()
+//	{ 
+//		cout<<"积分:"<<win*3+draw<<endl;
+//	}
+//}; 
+//
+//SoccerTeam::SoccerTeam (char *name)// 构造函数
+//{ 
+//	teamname = new char[strlen(name)+1];   
+//	strcpy(teamname,name);
+//	win = 31;
+//	draw = 7;
+//	lose = 0;
+//}; 
+//SoccerTeam::~SoccerTeam()  //析构函数
+//{
+//	delete teamname;
+//	cout<<"对象已经撤销！"<<endl;
+//};
+// 
+//int main()
+//{
+//	  char* name = "Man United";
+//    SoccerTeam teamA(name);
+//    teamA.printInfo();
+//    teamA.score();
+//    return 0;
+//}
+
+
+
+//===================拷贝构造函数=============================
+//class SoccerTeam
+//{
+//	char * teamname;
+//	int win;
+//	int draw;
+//	int lose;
+// 
+//	public:
+//     
+//	SoccerTeam(char * name);          //构造函数
+//	~SoccerTeam();                    //析构函数
+//	SoccerTeam(const SoccerTeam &t);  //拷贝构造函数
+//	void printInfo()
+//	{ 
+//		cout<<teamname<<":"<<win<<"胜"<<draw<<"平"<<lose<<"负"<<endl;
+//	}	
+//}; 
+//
+//SoccerTeam::SoccerTeam (char *name)// 构造函数
+//{ 
+//	cout<<"构造函数被调用"<<endl;
+//    teamname = new char[strlen(name)+1];   
+//    strcpy(teamname,name);
+//    win = 3;
+//    draw = 0;
+//    lose = 0;
+//} 
+//SoccerTeam::~SoccerTeam()  //析构函数
+//{
+//	delete teamname;
+//	cout<<"对象已经撤销！"<<endl;
+//	/*
+//	【疑问】调用系统自带的拷贝构造函数，在析构时候会发生什么？	
+//    */   
+//}
+//SoccerTeam::SoccerTeam(const SoccerTeam &t1)   //自己写的，深拷贝构造函数
+//{ 
+//	teamname = new char[strlen(t1.teamname)+1];  //重新开内存
+//    strcpy(teamname,t1.teamname);
+//	win = t1.win;
+//	draw = t1.draw;
+//	lose = t1.lose;
+//} 
+/////*
+////  【疑问】为什么参数要用常量and引用
+////	   如果用的是值传递，在实参转形参的时候就要调用拷贝构造函数了，这当然不是我们愿意看到的
+////	   用常量，是为了在引用传递的时候保护实参
+////*/    
+//   
+//int main()
+//{
+//	char* name = "Man United";
+//	SoccerTeam teamA(name);
+//	teamA.printInfo();
+//
+//	SoccerTeam teamB(teamA);  //调用拷贝构造函数
+//	/*【重点，难点】
+//	    如果调用的是默认的拷贝构造函数，则为浅拷贝，两个teamname指向同一块内存，释放多次就会报错
+//		如果调用自己写的new过的拷贝构造函数，则为深拷贝，两个teamname每次都重新申请内存空间，可以被多次释放
+//	*/
+//	//teamB.printInfo();
+//
+//	SoccerTeam teamC = teamA;  //调用拷贝构造函数的另一种写法
+//	teamC.printInfo();
+//
+//	return 0;
+//}
+
+
+
+//=====================对象的访问===========================
+//class SoccerTeam
+//{
+//	char * teamname;
+//public:
+//    int win;
+//    int draw;
+//    int lose;
+//    SoccerTeam(char * name);
+//	  SoccerTeam();      
+//    void printInfo()
+//    {   
+//       cout<<teamname<<endl;
+//    }
+//    void score()
+//    { 
+//       cout<<"积分:"<<win*3+draw<<endl;
+//    }
+//}; 
+//
+//SoccerTeam::SoccerTeam (char *name)  //有参构造函数
+//{ 
+//    teamname = new char[strlen(name)+1];   
+//    strcpy(teamname,name);
+//    win = 30;
+//    draw = 8;
+//    lose = 0;
+//} 
+//SoccerTeam::SoccerTeam() //无参构造函数
+//{
+//    teamname = "Real Madrid";   
+//	  win = 25;
+//	  draw = 3;
+//	  lose = 1;
+//};
+//   
+//int main()
+//{
+//	//普通数据类型
+//	char* name = "Man United";
+//	SoccerTeam teamA(name);
+//	teamA.printInfo();
+//	cout<<teamA.win<<endl;
+//	cout<<teamA.draw<<endl;
+//	cout<<teamA.lose<<endl;
+//	teamA.score();
+//
+//	//指针数据类型
+//	SoccerTeam *teamB = new SoccerTeam;
+//	teamB->printInfo();
+//	cout<<teamB->win<<endl;
+//	cout<<teamB->draw<<endl;
+//	cout<<teamB->lose<<endl;
+//	teamB->score();
+//
+//	return 0;
+//}
+
+//=====================this指针===========================
+//class SoccerTeam
+//{
+//    char * teamname;
+//public:
+//    int win;
+//    int draw;
+//    int lose;
+//    SoccerTeam(char * name);
+//    void printInfo()
+//    {   
+//       cout<<teamname<<endl;
+//    }
+//    void score()
+//    { 
+//        int sco = this->win * 3 + this->draw;   //this指针
+//        cout<<"积分:"<<sco<<endl;
+//    }
+//}; 
+//
+//    SoccerTeam::SoccerTeam (char *name)
+//    { 
+//         teamname = new char[strlen(name)+1];   
+//         strcpy(teamname,name);
+//         win = 3;
+//         draw = 0;
+//         lose = 0;
+//    } 
+//
+//   
+//int main()
+//{
+//	char* name = "Man United";
+//	SoccerTeam teamA(name);
+//	teamA.printInfo();
+//	cout<<teamA.win<<endl;
+//	cout<<teamA.draw<<endl;
+//	cout<<teamA.lose<<endl;
+//	teamA.score();
+//}
+//
+//
+
+//=====================静态成员===========================
+////	/*【重点】
+////	    静态成员归类所有，并不归对象所有。记住这句话就够了
+////	*/
+//class SoccerTeam
+//{
+//	char * teamname;
+//	static char* stype;  //静态成员
+//public:
+//    int win;
+//    int draw;
+//    int lose;
+//    SoccerTeam(char * name);
+//    void printInfo()
+//    {   
+//       cout<<teamname<<endl;
+//       cout<<stype<<endl;
+//    }
+//    void score()
+//    { 
+//        int sco = this->win * 3 + this->draw;
+//        cout<<"积分:"<<sco<<endl;
+//    }
+//}; 
+//
+//char * SoccerTeam::stype = "Club";   //一般情况下在类外进行初始化
+//SoccerTeam::SoccerTeam (char *name)
+//{ 
+//	stype = name; //可以修改，但是改的都是这个类里面为一个那个stype
+//    teamname = new char[strlen(name)+1];   
+//    strcpy(teamname,name);
+//    win = 3;
+//    draw = 0;
+//    lose = 0;
+//}; 
+//
+//   
+//int main()
+//{
+//	char* name = "Man United";
+//	SoccerTeam teamA(name);
+//	char* name1 = "Real Madrid";
+//	SoccerTeam teamB(name1);
+//	teamA.printInfo(); //stype已经被改成了 "Real Madrid"
+//	teamB.printInfo(); 
+//	teamA.score();
+//}
+
+
+
+//=====================常量成员===========================
+//	/*【重点】
+//	    类的常量数据成员必须进行初始化，而且只能通过构造函数的成员初始化列表的方式来进行。
+//      在对象被创建以后，其常量数据成员的值就不允许被修改（只可读取其值，但不可进行改变）
+//      ---------------------------------------------------------------------------------
+//      常量函数成员只有权读取相应对象的内容，但无权修改任何常量或非常量数据成员。
+//	*/
+//class SoccerTeam
+//{
+//	char * teamname;
+//	const int season;  //常量数据成员
+//public:
+//    int win;
+//    int draw;
+//    int lose;
+//
+//    SoccerTeam(char * name);
+//    void printInfo()
+//    {   
+//       cout<<"球队名称："<<teamname<<endl;
+//       cout<<"当前赛季："<<season<<endl;
+//       //season += 1; 错误！会有提示的！
+//    }
+//    void score() const//常量函数成员，可读不可写
+//    { 
+//		//win+=5;   错误，会有提示的！ 
+//		int sco = this->win * 3 + this->draw;
+//        cout<<"积分:"<<sco<<endl;
+//    }
+//
+//}; 
+//
+//SoccerTeam::SoccerTeam (char *name):season(2017)  //初始化列表赋值，防止调用构造函数时候被改写
+//{ 
+//    teamname = new char[strlen(name)+1];   
+//    strcpy(teamname,name);
+//    win = 3;
+//    draw = 0;
+//    lose = 0;
+//}; 
+//
+//   
+//int main()
+//{
+//	char* name = "Man United";
+//	SoccerTeam teamA(name);
+//	teamA.printInfo();
+//	teamA.score();
+//}
+
+
+//=====================友元函数1=======================================
+//   /*【重点】将外部普通函数说明为某类的友元函数
+//         在该函数中，可以直接访问类里面的私有成员
+//   */
+//class SoccerTeam
+//{
+//    char * teamname;
+//public:
+//    int win;
+//    int draw;
+//    int lose;
+//    SoccerTeam(char * name);
+//
+//	friend void printInfo(SoccerTeam st);   //说明一个类外的普通函数为本类的友元函数
+//    
+//	void score()
+//    { 
+//		int sco = this->win * 3 + this->draw;
+//        cout<<"积分:"<<sco<<endl;
+//    }
+//}; 
+//
+//SoccerTeam::SoccerTeam (char *name)
+//{ 
+//    teamname = new char[strlen(name)+1];   
+//    strcpy(teamname,name);
+//    win = 3;
+//    draw = 0;
+//    lose = 0;
+//}; 
+//
+//void printInfo(SoccerTeam st) //类外的普通函数，是SoccerTeam类的友元函数
+//{   
+//    cout<<"球队名称："<<st.teamname<<endl;   //在类外直接访问私有成员
+//}  
+//int main()
+//{
+//	char* name = "Man United";
+//	SoccerTeam teamA(name);
+//	printInfo(teamA);
+//	teamA.score();
+//}
+
+
+//=====================友元函数2==========================================
+//   /*将一个类的成员函数说明为另一个类的友元函数
+//         在该函数中，可以直接访问类里面的私有成员
+//   */
+//class SoccerA;
+//class SoccerB
+//{
+//    char * teamnameB;
+//public:
+//    int win;
+//    int draw;
+//    int lose;
+//    SoccerB(char * name);
+//    void printInfo(SoccerA sc);        //类B中声明打印函数（类B的成员函数，但是参数是类A的对象） 
+//}; 
+//
+//SoccerB::SoccerB (char *name)
+//{ 
+//        teamnameB = new char[strlen(name)+1];   
+//        strcpy(teamnameB,name);
+//        win = 3;
+//        draw = 0;
+//        lose = 0;
+//}; 
+//
+//class SoccerA
+//{
+//    char * teamnameA;
+//public:
+//    int win;
+//    int draw;
+//    int lose;
+//
+//    SoccerA(char * name);
+//    friend void SoccerB::printInfo(SoccerA sc); 
+//    //类A中声明，类B的打印函数为类A的友元函数，即类B的打印函数可访问类A的私有成员  
+//}; 
+//
+//SoccerA::SoccerA (char *name)
+//{ 
+//	teamnameA = new char[strlen(name)+1];   
+//	strcpy(teamnameA,name);
+//	win = 3;
+//	draw = 0;
+//	lose = 0;
+//}; 
+////定义类B的打印函数（类A的友元函数）
+//void SoccerB::printInfo(SoccerA sc) 
+//{    
+//    cout<<"球队名称："<<sc.teamnameA<<endl;   
+//}  
+//int main()
+//{
+//	char* name = "Man United";
+//	char* name1 = "FC Barcelona";
+//	SoccerB teamB(name);           //定义类B的对象teamB
+//	SoccerA teamA(name1);          //定义类A的对象teamA
+//	teamB.printInfo(teamA);        //类B的函数（为类A的友元函数）访问类A的私有成员
+//}
+
+
+//=====================友元类===========================
+//   /*将一个类B说明为另一个类A的友元类
+//       类B中的所有函数都是类A的友元函数
+//       类B可以访问类A中的所有成员
+//   */
+//class SoccerA;
+//class SoccerB
+//{
+//    char * teamnameB;
+//public:
+//    int win;
+//    int draw;
+//    int lose;
+//    SoccerB(char * name);
+//    void printInfo(SoccerA sc);        //类B中声明打印函数 
+//}; 
+//
+//SoccerB::SoccerB (char *name)
+//{ 
+//    teamnameB = new char[strlen(name)+1];   
+//    strcpy(teamnameB,name);
+//    win = 3;
+//    draw = 0;
+//    lose = 0;
+//}; 
+//
+//class SoccerA
+//{
+//    char * teamnameA;
+//public:
+//    int win;
+//    int draw;
+//    int lose;
+//
+//    SoccerA(char * name);
+//    friend SoccerB; 
+//    //类A中声明，讲类B定义为类A的友元类，即类B的函数可访问类A的私有成员。
+//    //注释掉此行的话， printInfo函数的定义就会报错，访问不到teamnameA 
+//}; 
+//
+//SoccerA::SoccerA (char *name)
+//{ 
+//    teamnameA = new char[strlen(name)+1];   
+//    strcpy(teamnameA,name);
+//    win = 3;
+//    draw = 0;
+//    lose = 0;
+//}; 
+//
+//
+//void SoccerB::printInfo(SoccerA sc) 
+//{    
+//    cout<<"球队名称："<<sc.teamnameA<<endl;   
+//}  
+//int main()
+//{
+//	char* name = "Man United";
+//	char* name1 = "FC Barcelona";
+//	SoccerB teamB(name);           //定义类B的对象teamB
+//	SoccerA teamA(name1);          //定义类A的对象teamA
+//	teamB.printInfo(teamA);        //类B的函数（B类为类A的友元类）访问类A的私有成员
+//}
+
+
+
+//=====================友元方式运算符重载===========================
+//   /*【重点】
+//       【1】所有运算分量，必须显式地列在本友元函数的参数表中
+//       而且这些参数类型中，【2】至少要有一个应该是说明该友元的类类型，或是对该类的引用
+//   */
+//class ComplexAdd
+//{
+//    double Real, Image;
+// public:
+//	ComplexAdd(double r, double i)
+//	{ 
+//		Real=r; Image=i; 
+//	}
+//	friend ComplexAdd operator + (ComplexAdd c1,ComplexAdd c2);   
+//	//友元函数，重载加号。【1】两个参数都写在参数表，【2】且都是ComplexAdd类的对象    
+//	void show()
+//	{   
+//		cout<<Real;
+//		if(Image>0) 
+//		{
+//			cout<<'+'<<Image<<'i';
+//		}
+//		else if(Image<0) 
+//		{
+//			cout<<Image<<'i';
+//		}
+//		cout<<endl; 
+//	}
+//};
+//ComplexAdd operator+ (ComplexAdd c1,ComplexAdd c2) 
+//{
+//     ComplexAdd  temp(0,0);
+//     temp.Real=c1.Real+c2.Real; 
+//     temp.Image=c1.Image+c2.Image; 
+//     return temp;
+//}
+//void main()
+//{ 
+//    ComplexAdd c1(2,3), c2(4,-5), c3(0,0);
+//    cout<<"c1=";
+//    c1.show();
+//    cout<<"c2=";
+//    c2.show();
+//    c3 = c1 + c2;
+//    cout<<"c3=";
+//    c3.show();
+//}
+
+
+//=====================成员函数方式运算符重载===========================
+//   /*【重点，难点】
+//       总以【1】当前调用者对象(*this)作为该成员函数的隐式第一运算分量
+//       若所定义的运算多于一个运算对象时，【2】才将其余运算对象显式地列在该成员函数的参数表中
+//   */
+//class ComplexAdd
+//{
+//    double Real, Image;
+//public:
+//	ComplexAdd(double r, double i)
+//	{ 
+//		Real=r; Image=i; 
+//	}
+//	ComplexAdd operator + (ComplexAdd c2); 
+//	//ComplexAdd类的成员函数。需要用一个ComplexAdd类的实例来调用
+//	//它看似只有一个参数，【1】但是实际上，调用这个函数的实例，即this指针指向的ComplexAdd类的对象，也是一个参数。【2】c2是另一个参数      
+//	void show()
+//	{   
+//		cout<<Real;
+//		if(Image>0)
+//		{
+//			cout<<'+'<<Image<<'i';
+//		} 
+//		else if(Image<0) 
+//		{
+//			cout<<Image<<'i';
+//		}
+//		cout<<endl; 
+//	}
+//};
+//ComplexAdd ComplexAdd::operator+(ComplexAdd c2) 
+//{
+//     ComplexAdd  temp(0,0);
+//     temp.Real=this->Real+c2.Real;    //this指针相当于c1!
+//     temp.Image=this->Image+c2.Image; 
+//     return temp;	
+//}
+//void main()
+//{ 
+//    ComplexAdd c1(2,3), c2(4,-5), c3(0,0);
+//    cout<<"c1=";
+//    c1.show();
+//    cout<<"c2=";
+//    c2.show();
+//    c3 = c1 + c2;
+//    cout<<"c3=";
+//    c3.show();
+//}
+//// 
+
+
+
+

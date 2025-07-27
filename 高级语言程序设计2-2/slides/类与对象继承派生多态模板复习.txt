@@ -1,0 +1,163 @@
+//=====================友元方式运算符重载===========================
+//   /*【重点】
+//       【1】所有运算分量，必须显式地列在本友元函数的参数表中
+//       而且这些参数类型中，【2】至少要有一个应该是说明该友元的类类型，或是对该类的引用
+//   */
+//class ComplexAdd
+//{
+//    double Real, Image;
+// public:
+//	ComplexAdd(double r, double i)
+//	{ 
+//		Real=r; Image=i; 
+//	}
+//	friend ComplexAdd operator + (ComplexAdd c1,ComplexAdd c2);   
+//	//友元函数，重载加号。【1】两个参数都写在参数表，【2】且都是ComplexAdd类的对象    
+//	void show()
+//	{   
+//		cout<<Real;
+//		if(Image>0) 
+//		{
+//			cout<<'+'<<Image<<'i';
+//		}
+//		else if(Image<0) 
+//		{
+//			cout<<Image<<'i';
+//		}
+//		cout<<endl; 
+//	}
+//};
+//ComplexAdd operator+ (ComplexAdd c1,ComplexAdd c2) 
+//{
+//     ComplexAdd  temp(0,0);
+//     temp.Real=c1.Real+c2.Real; 
+//     temp.Image=c1.Image+c2.Image; 
+//     return temp;
+//}
+//void main()
+//{ 
+//    ComplexAdd c1(2,3), c2(4,-5), c3(0,0);
+//    cout<<"c1=";
+//    c1.show();
+//    cout<<"c2=";
+//    c2.show();
+//    c3 = c1 + c2;
+//    cout<<"c3=";
+//    c3.show();
+//}
+
+
+//=====================成员函数方式运算符重载===========================
+//   /*【重点，难点】
+//       总以【1】当前调用者对象(*this)作为该成员函数的隐式第一运算分量
+//       若所定义的运算多于一个运算对象时，【2】才将其余运算对象显式地列在该成员函数的参数表中
+//   */
+//class ComplexAdd
+//{
+//    double Real, Image;
+//public:
+//	ComplexAdd(double r, double i)
+//	{ 
+//		Real=r; Image=i; 
+//	}
+//	ComplexAdd operator + (ComplexAdd c2); 
+//	//ComplexAdd类的成员函数。需要用一个ComplexAdd类的实例来调用
+//	//它看似只有一个参数，【1】但是实际上，调用这个函数的实例，即this指针指向的ComplexAdd类的对象，也是一个参数。【2】c2是另一个参数      
+//	void show()
+//	{   
+//		cout<<Real;
+//		if(Image>0)
+//		{
+//			cout<<'+'<<Image<<'i';
+//		} 
+//		else if(Image<0) 
+//		{
+//			cout<<Image<<'i';
+//		}
+//		cout<<endl; 
+//	}
+//};
+//ComplexAdd ComplexAdd::operator+(ComplexAdd c2) 
+//{
+//     ComplexAdd  temp(0,0);
+//     temp.Real=this->Real+c2.Real;    //this指针相当于c1!
+//     temp.Image=this->Image+c2.Image; 
+//     return temp;	
+//}
+//void main()
+//{ 
+//    ComplexAdd c1(2,3), c2(4,-5), c3(0,0);
+//    cout<<"c1=";
+//    c1.show();
+//    cout<<"c2=";
+//    c2.show();
+//    c3 = c1 + c2;
+//    cout<<"c3=";
+//    c3.show();
+//}
+//// 
+
+
+==============文件类的继承和派生=======================
+//class 文件类
+//{
+//public:
+//	char* 文件名;
+//	long 文件长度;
+//	构造函数
+//	
+//};
+//
+//class 写字板文件类, 继承文件类
+//{
+//private:
+//	int 编码方式;
+//public:
+//	构造函数
+//             成员函数：更新文件，更新文件大小，更新编码形式
+//	void show();
+//};
+//
+//
+//void 文本文件类::更新编码形式(int 新编码)
+//{
+//	switch(新编码)
+//                               {
+//		case 0:		this->编码形式= ASCII;		break;
+//		case 1:		this->编码形式= ？？;
+//		}
+//}
+//
+//void文本文件类::更新文件(int 新编码, char* 文件名, long 文件长度)
+//{
+//	更新，覆盖原成员变量
+//}
+
+
+
+==========================链表类模板的结合=================
+
+//template <class T> class list 
+//{ 
+//   struct node 
+//   { 
+//        T data; 
+//        node * next; 
+//    } *head, *tail;
+//public:
+//    list();
+//    void 从链表的尾部插入(T item); 
+//    int 链表的计数();
+//   void 链表的打印(); 
+//    void 链表的排序();
+//};
+ 
+//构造函数
+//template <class T> list<T>::list()
+//{
+//   head = NULL;
+//    tail = NULL;
+//}
+//成员函数不会太难同学们自行结合类模板去编写一下哈！
+ 
+
