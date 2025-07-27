@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BookConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<BookID>SH2019_D1</BookID>
+	<BookName>2019上海电子书D1</BookName>
+	<BookDirName>SH2019_D1</BookDirName>
+	<BookBaseDir>上海电子书</BookBaseDir>
+	<BookPic>SH2019_D1_1.JPG</BookPic>
+</BookConfig>
